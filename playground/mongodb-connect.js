@@ -1,3 +1,7 @@
+// cd to Program Files/MongoDB/Server/4.0/bin
+// execute: mongod.exe --dbpath /Users/Ernest/mongo-data
+// to start DB server.
+
 // Get Mongo client lets us connect to mongo server and issue commands in db.
 // const MongoClient = require('mongodb').MongoClient;
 // using ES6 object destructuring...
