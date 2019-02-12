@@ -1,39 +1,30 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
+var app = express();
 
-// var newTodo = new Todo({
-//   text: 'Cook dinner'
-// });
-//
-// // Responsible for actually saving into db.
-// // It is a promise.
-// newTodo.save().then((doc) => {
-//   console.log('Saved todo', doc)
-// }, (e) => {
-//   console.log('Unable to save todo');
-// });
+// BodyParser is gonna take JSON and convert it into an Object
+// .json() returns a function which is the middleware we give to express.
+app.use(bodyParser.json());
 
-// Challenge: Create a new entry.
-var newTodo2 = new Todo({
-  // Careful of type casting!
-  text: '            Edit video           '
-})
+app.post('/todos', (req, res) => {
+  var todo = new Todo({
+    text: req.body.text
+  });
 
-newTodo2.save().then((d) => {
-  console.log(JSON.stringify(d, undefined, 2));
-}, (e) => {
-  console.log('Unable to save', e);
+  todo.save().then((d) => {
+    res.send(d);
+  }, (e) => {
+    res.status(400).send(e);
+  })
 });
 
+// GET /todos/123asdas to read Todos
 
-var newUser = new User({
-  email: 'ernnex@gmail.com'
-});
-
-newUser.save().then((d) => {
-  console.log(JSON.stringify(d, undefined, 2));
-}, (e) => {
-  console.log('Unable to save', e);
+app.listen(3000, () => {
+  console.log('Started on port 3000!');
 })
