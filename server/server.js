@@ -7,6 +7,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 var app = express();
+const port = process.env.PORT || 3000
 
 // BodyParser is gonna take JSON and convert it into an Object
 // .json() returns a function which is the middleware we give to express.
@@ -48,8 +49,8 @@ app.get('/todos/:id', (req, res) => {
   }, (e) => res.status(400).send({}));
 });
 
-app.listen(3000, () => {
-  console.log('Started on port 3000!');
+app.listen(port, () => {
+  console.log(`Started on port ${port}!`);
 });
 
 module.exports = {app};
