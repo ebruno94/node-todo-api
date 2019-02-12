@@ -23,7 +23,7 @@ app.post('/todos', (req, res) => {
   })
 });
 
-// GET /todos/123asdas to read Todos
+// GET /todos to read Todos
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => {
     res.send({todos});
